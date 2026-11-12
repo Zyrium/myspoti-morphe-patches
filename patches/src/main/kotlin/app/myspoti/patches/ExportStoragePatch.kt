@@ -62,7 +62,7 @@ private val applicationCollectionsRead = Fingerprint(
     parameters = emptyList(),
     filters = listOf(
         methodCall(
-            definingClass = "Lqr5;",
+            definingClass = "Ltr5;",
             name = "g",
             returnType = "V",
             parameters = listOf("Ljava/lang/String;"),
@@ -71,17 +71,17 @@ private val applicationCollectionsRead = Fingerprint(
 )
 
 private val offlineStoreLoad = Fingerprint(
-    definingClass = "Lft5;",
+    definingClass = "Lit5;",
     name = "o",
     returnType = "Ljava/util/ArrayList;",
     parameters = listOf("Ljava/io/File;"),
 )
 
 private val accountClaimLiveRoot = Fingerprint(
-    definingClass = "Lkr5;",
+    definingClass = "Lnr5;",
     name = "a",
     returnType = "Ljava/lang/Object;",
-    parameters = listOf("Landroid/content/Context;", "Ljava/lang/String;", "Lu51;"),
+    parameters = listOf("Landroid/content/Context;", "Ljava/lang/String;", "Lz51;"),
     filters = listOf(
         string("offline"),
         methodCall(
@@ -94,10 +94,10 @@ private val accountClaimLiveRoot = Fingerprint(
 )
 
 private val accountParkLiveRoot = Fingerprint(
-    definingClass = "Lkr5;",
+    definingClass = "Lnr5;",
     name = "e",
     returnType = "Ljava/lang/Object;",
-    parameters = listOf("Landroid/content/Context;", "Ljava/lang/String;", "Lu51;"),
+    parameters = listOf("Landroid/content/Context;", "Ljava/lang/String;", "Lz51;"),
     filters = listOf(
         string("offline"),
         methodCall(
@@ -111,33 +111,33 @@ private val accountParkLiveRoot = Fingerprint(
 
 
 private val settingsClassicScreen = Fingerprint(
-    definingClass = "Lpm2;",
-    name = "t",
+    definingClass = "Ltm2;",
+    name = "u",
     returnType = "V",
-    parameters = listOf("Lzk5;", "Lnx0;", "I"),
-    // The 2.4.0 screen is a single composable with eleven section headers.
+    parameters = listOf("Lcl5;", "Lsx0;", "I"),
+    // The 2.4.1 screen is a single composable with eleven section headers.
     // The seventh header (zero-based index 6) is Downloads.
     filters = List(11) {
         methodCall(
-            definingClass = "Lpm2;",
-            name = "s",
+            definingClass = "Ltm2;",
+            name = "t",
             returnType = "V",
-            parameters = listOf("I", "I", "Lnx0;"),
+            parameters = listOf("I", "I", "Lsx0;"),
         )
     },
 )
 
 private val immersiveSettingsPageRouter = Fingerprint(
-    definingClass = "Ltx;",
+    definingClass = "Lyx;",
     name = "invoke",
     returnType = "Ljava/lang/Object;",
     parameters = listOf("Ljava/lang/Object;", "Ljava/lang/Object;", "Ljava/lang/Object;", "Ljava/lang/Object;"),
     filters = listOf(
         methodCall(
-            definingClass = "Lgs3;",
+            definingClass = "Lks3;",
             name = "h",
             returnType = "V",
-            parameters = listOf("Lzk5;", "Lhu2;", "Lgu2;", "Lnx0;", "I"),
+            parameters = listOf("Lcl5;", "Llu2;", "Lku2;", "Lsx0;", "I"),
         ),
     ),
 )
@@ -191,7 +191,7 @@ private fun applyMyspotiStorageHooks() {
 
     val sectionHeaderCalls = settingsClassicScreen.instructionMatches
     require(sectionHeaderCalls.size == 11) {
-        "Expected eleven Classic Settings section headers in MySpoti 2.4.0, found ${sectionHeaderCalls.size}"
+        "Expected eleven Classic Settings section headers in MySpoti 2.4.1, found ${sectionHeaderCalls.size}"
     }
     settingsClassicScreen.method.addInstructions(
         sectionHeaderCalls[6].index,
@@ -209,7 +209,7 @@ private fun applyMyspotiStorageHooks() {
 
     // The Settings page router is AnimatedContent's content lambda. Its first
     // argument is AnimatedContentScope and its second is the page enum. The Downloads
-    // branch calls Lgs3.h in 2.4.0, which anchors this otherwise shared Function4 lambda.
+    // branch calls Lks3.h in 2.4.1, which anchors this otherwise shared Function4 lambda.
     // Compose emits the target page last, after the outgoing page, so visibility follows
     // the destination rather than a page being disposed.
     immersiveSettingsPageRouter.method.addInstructions(
@@ -224,7 +224,7 @@ private fun applyMyspotiStorageHooks() {
 @Suppress("unused")
 val myspotiExportStorageStable = bytecodePatch(
     name = "MySpoti Export & Storage",
-    description = "Adds Export & storage to Settings > Downloads in MySpoti 2.4.0 in both Classic and Immersive looks, matching MySpoti's Immersive glass, grouped surfaces and selected accent; includes tagged audio exports, offline lyrics resolution/cache (including romanization), portable LRC and JSON lyrics, embedded lyrics, playlist/album M3U8 manifests, reinstall restoration into native Downloads and lyrics caches, shared track files and offline storage migration while preserving MySpoti's native playback and AutoMix planner.",
+    description = "Adds Export & storage to Settings > Downloads in MySpoti 2.4.1 in both Classic and Immersive looks, matching MySpoti's Immersive glass, grouped surfaces and selected accent; includes tagged audio exports, offline lyrics resolution/cache (including romanization), portable LRC and JSON lyrics, embedded lyrics, playlist/album M3U8 manifests, reinstall restoration into native Downloads and lyrics caches, shared track files and offline storage migration while preserving MySpoti's native playback and AutoMix planner.",
     default = true,
 ) {
     compatibleWith(MYSPOTI_STABLE)

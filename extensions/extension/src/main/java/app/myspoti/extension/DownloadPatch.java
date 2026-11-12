@@ -51,9 +51,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * Runtime bridge for the R8-minified MySpoti 2.4.0 stable APK.
- * Verified APK mappings: OfflineStore=ft5, OfflineTrack=gt5,
- * OfflineCrypto=sr5, OfflineCollections=qr5, OfflineCollection=lr5, OfflineAccounts=kr5.
+ * Runtime bridge for the R8-minified MySpoti 2.4.1 stable APK.
+ * Verified APK mappings: OfflineStore=it5, OfflineTrack=jt5,
+ * OfflineCrypto=vr5, OfflineCollections=tr5, OfflineCollection=or5, OfflineAccounts=nr5.
  * Myspoti source origin: https://github.com/kota-zo/myspoti (GPL-3.0).
  */
 public final class DownloadPatch {
@@ -61,11 +61,11 @@ public final class DownloadPatch {
     private static final String PREFS = "morphe_download_tools";
     private static final String PREF_LOCATION = "storage_id";
 
-    // R8 class names and member names are pinned to the inspected 2.4.0 stable APK.
-    private static final String STORE = "ft5";
-    private static final String TRACK = "gt5";
-    private static final String CRYPTO = "sr5";
-    private static final String COLLECTIONS = "qr5";
+    // R8 class names and member names are pinned to the inspected 2.4.1 stable APK.
+    private static final String STORE = "it5";
+    private static final String TRACK = "jt5";
+    private static final String CRYPTO = "vr5";
+    private static final String COLLECTIONS = "tr5";
 
     private static volatile Context appContext;
     private static volatile Activity foregroundActivity;
@@ -154,10 +154,10 @@ public final class DownloadPatch {
      * final recomposition. This avoids depending on Compose internals or R8-renamed APIs.
      */
     public static void syncImmersiveSettingsAction(Object page) {
-        // Lsg7 is the inspected 2.4.0 R8 descriptor for the private SettingsPage enum
+        // Lwg7 is the inspected 2.4.1 R8 descriptor for the private SettingsPage enum
         // (Root, Playback, Sources, Lyrics, Streaming, Crossfade, Downloads, ...).
         // The router's Function4 class is R8-merged, so ignore its unrelated call sites.
-        if (!(page instanceof Enum<?>) || !"sg7".equals(page.getClass().getName())) return;
+        if (!(page instanceof Enum<?>) || !"wg7".equals(page.getClass().getName())) return;
         boolean downloads = "Downloads".equals(((Enum<?>) page).name());
         runOnMain(() -> {
             SETTINGS_ACTION_HANDLER.removeCallbacks(REMOVE_SETTINGS_ACTION);
@@ -702,8 +702,8 @@ public final class DownloadPatch {
 
     /**
      * Snapshot of whole downloaded playlists, albums and Liked Songs.
-     * APK 2.4.0 DEX mapping: qr5.e is SnapshotStateMap<String, lr5>;
-     * lr5 fields a/b/c/d are uri/type/name/trackIds respectively.
+     * APK 2.4.1 DEX mapping: tr5.e is SnapshotStateMap<String, or5>;
+     * or5 fields a/b/c/d are uri/type/name/trackIds respectively.
      */
     public static List<CollectionSnapshot> downloadedCollections() throws Exception {
         Class<?> collectionsClass = Class.forName(COLLECTIONS);
@@ -1475,7 +1475,7 @@ public final class DownloadPatch {
         }
     }
 
-    /** The R8-mapped OfflineCollections.file field is qr5.b; collections are qr5.e; singles are qr5.f. */
+    /** The R8-mapped OfflineCollections.file field is tr5.b; collections are tr5.e; singles are tr5.f. */
     private static boolean setCollectionsFileAndRead(Context context) {
         try {
             Class<?> collections = Class.forName(COLLECTIONS);
