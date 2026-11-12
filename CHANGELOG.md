@@ -1,3 +1,9 @@
+## [1.4.0](https://github.com/Zyrium/myspoti-morphe-patches/compare/v1.3.2...v1.4.0) (2026-11-12)
+
+### ✨ New Features
+
+* **myspoti:** add MySpoti 2.4.1 compatibility ([db73bb9](https://github.com/Zyrium/myspoti-morphe-patches/commit/db73bb9a6d2e95d849a55af65703853ad6de76a4))
+
 ## [1.3.2](https://github.com/amit-0i/myspoti-morphe-patches/compare/v1.3.1...v1.3.2) (2026-11-06)
 
 ### 🐛 Bug Fixes
