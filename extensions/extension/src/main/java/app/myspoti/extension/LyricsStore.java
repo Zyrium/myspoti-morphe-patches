@@ -21,11 +21,11 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * Bridge to MySpoti 2.4.1's own LyricsApi and its private offline cache.
+ * Bridge to Orpheon 1.0.0-beta.1's own LyricsApi and its private offline cache.
  *
- * APK mappings verified against the 2.4.1 source and release DEX:
- * LyricsApi = Llu4; LyricsApi.Track = Lst4; cache = Llu4.b;
- * in-flight requests = Llu4.c; prefetch(Track, Track?) = Llu4.C(Lst4;, Lst4;).
+ * APK mappings verified against the 1.0.0-beta.1 source and release DEX:
+ * LyricsApi = Ln55; LyricsApi.Track = Lr45; cache = Ln55.b;
+ * in-flight requests = Ln55.c; prefetch(Track, Track?) = Ln55.F(Lr45;, Lr45;).
  * The release build has R8-rewritten coroutine continuation types, so invoking the public
  * prefetch entry point and waiting on its cache/in-flight state is safer than synthesizing
  * a Continuation with the source-level Kotlin type name.
@@ -35,8 +35,8 @@ import java.util.Map;
  */
 final class LyricsStore {
     private static final String TAG = "MyspotiStoragePatch";
-    private static final String API_CLASS = "lu4";
-    private static final String TRACK_CLASS = "st4";
+    private static final String API_CLASS = "n55";
+    private static final String TRACK_CLASS = "r45";
     private static final String LYRICS_ENTITY = "com.music.spotui.data.entity.Lyrics";
     private static final long FETCH_WAIT_MS = 30_000L;
     private static final long NATIVE_CACHE_MAX_AGE_MS = 14L * 24L * 60L * 60L * 1000L;
@@ -195,7 +195,7 @@ final class LyricsStore {
     private static Method findPrefetchMethod(Class<?> api, Class<?> trackType) throws Exception {
         Method prefetch;
         try {
-            prefetch = api.getDeclaredMethod("C", trackType, trackType);
+            prefetch = api.getDeclaredMethod("F", trackType, trackType);
         } catch (NoSuchMethodException renamed) {
             prefetch = null;
             for (Method candidate : api.getDeclaredMethods()) {

@@ -7,7 +7,7 @@ import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.BytecodePatchContext
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.patch.resourcePatch
-import app.template.patches.shared.Constants.MYSPOTI_STABLE
+import app.template.patches.shared.Constants.ORPHEON_BETA
 
 private const val EXT = "Lapp/myspoti/extension/DownloadPatch;"
 private const val DOWNLOAD_TOOLS_ACTIVITY = "app.myspoti.extension.DownloadToolsActivity"
@@ -62,7 +62,7 @@ private val applicationCollectionsRead = Fingerprint(
     parameters = emptyList(),
     filters = listOf(
         methodCall(
-            definingClass = "Ltr5;",
+            definingClass = "Ln66;",
             name = "g",
             returnType = "V",
             parameters = listOf("Ljava/lang/String;"),
@@ -71,17 +71,17 @@ private val applicationCollectionsRead = Fingerprint(
 )
 
 private val offlineStoreLoad = Fingerprint(
-    definingClass = "Lit5;",
+    definingClass = "Ld86;",
     name = "o",
     returnType = "Ljava/util/ArrayList;",
     parameters = listOf("Ljava/io/File;"),
 )
 
 private val accountClaimLiveRoot = Fingerprint(
-    definingClass = "Lnr5;",
+    definingClass = "Lh66;",
     name = "a",
     returnType = "Ljava/lang/Object;",
-    parameters = listOf("Landroid/content/Context;", "Ljava/lang/String;", "Lz51;"),
+    parameters = listOf("Landroid/content/Context;", "Ljava/lang/String;", "Lg91;"),
     filters = listOf(
         string("offline"),
         methodCall(
@@ -94,10 +94,10 @@ private val accountClaimLiveRoot = Fingerprint(
 )
 
 private val accountParkLiveRoot = Fingerprint(
-    definingClass = "Lnr5;",
+    definingClass = "Lh66;",
     name = "e",
     returnType = "Ljava/lang/Object;",
-    parameters = listOf("Landroid/content/Context;", "Ljava/lang/String;", "Lz51;"),
+    parameters = listOf("Landroid/content/Context;", "Ljava/lang/String;", "Lg91;"),
     filters = listOf(
         string("offline"),
         methodCall(
@@ -111,33 +111,33 @@ private val accountParkLiveRoot = Fingerprint(
 
 
 private val settingsClassicScreen = Fingerprint(
-    definingClass = "Ltm2;",
-    name = "u",
+    definingClass = "Ls28;",
+    name = "p",
     returnType = "V",
-    parameters = listOf("Lcl5;", "Lsx0;", "I"),
-    // The 2.4.1 screen is a single composable with eleven section headers.
-    // The seventh header (zero-based index 6) is Downloads.
-    filters = List(11) {
+    parameters = listOf("Lvz5;", "Lq11;", "I"),
+    // The 1.0.0-beta.1 screen is a single composable with twelve section headers.
+    // The sixth header (zero-based index 5) is Downloads.
+    filters = List(12) {
         methodCall(
-            definingClass = "Ltm2;",
-            name = "t",
+            definingClass = "Ls28;",
+            name = "o",
             returnType = "V",
-            parameters = listOf("I", "I", "Lsx0;"),
+            parameters = listOf("I", "I", "Lq11;"),
         )
     },
 )
 
 private val immersiveSettingsPageRouter = Fingerprint(
-    definingClass = "Lyx;",
+    definingClass = "Lgz;",
     name = "invoke",
     returnType = "Ljava/lang/Object;",
     parameters = listOf("Ljava/lang/Object;", "Ljava/lang/Object;", "Ljava/lang/Object;", "Ljava/lang/Object;"),
     filters = listOf(
         methodCall(
-            definingClass = "Lks3;",
+            definingClass = "Lq04;",
             name = "h",
             returnType = "V",
-            parameters = listOf("Lcl5;", "Llu2;", "Lku2;", "Lsx0;", "I"),
+            parameters = listOf("Lvz5;", "Lm03;", "Ll03;", "Lq11;", "I"),
         ),
     ),
 )
@@ -190,11 +190,11 @@ private fun applyMyspotiStorageHooks() {
 
 
     val sectionHeaderCalls = settingsClassicScreen.instructionMatches
-    require(sectionHeaderCalls.size == 11) {
-        "Expected eleven Classic Settings section headers in MySpoti 2.4.1, found ${sectionHeaderCalls.size}"
+    require(sectionHeaderCalls.size == 12) {
+        "Expected twelve Classic Settings section headers in Orpheon 1.0.0-beta.1, found ${sectionHeaderCalls.size}"
     }
     settingsClassicScreen.method.addInstructions(
-        sectionHeaderCalls[6].index,
+        sectionHeaderCalls[5].index,
         """
             invoke-static {}, $EXT->showForCurrentActivity()V
         """.trimIndent(),
@@ -209,7 +209,7 @@ private fun applyMyspotiStorageHooks() {
 
     // The Settings page router is AnimatedContent's content lambda. Its first
     // argument is AnimatedContentScope and its second is the page enum. The Downloads
-    // branch calls Lks3.h in 2.4.1, which anchors this otherwise shared Function4 lambda.
+    // branch calls Lq04.h in 1.0.0-beta.1, which anchors this otherwise shared Function4 lambda.
     // Compose emits the target page last, after the outgoing page, so visibility follows
     // the destination rather than a page being disposed.
     immersiveSettingsPageRouter.method.addInstructions(
@@ -224,10 +224,10 @@ private fun applyMyspotiStorageHooks() {
 @Suppress("unused")
 val myspotiExportStorageStable = bytecodePatch(
     name = "MySpoti Export & Storage",
-    description = "Adds Export & storage to Settings > Downloads in MySpoti 2.4.1 in both Classic and Immersive looks, matching MySpoti's Immersive glass, grouped surfaces and selected accent; includes tagged audio exports, offline lyrics resolution/cache (including romanization), portable LRC and JSON lyrics, embedded lyrics, playlist/album M3U8 manifests, reinstall restoration into native Downloads and lyrics caches, shared track files and offline storage migration while preserving MySpoti's native playback and AutoMix planner.",
+    description = "Adds Export & storage to Settings > Downloads in Orpheon 1.0.0-beta.1 in both Classic and Immersive looks, matching Orpheon's Immersive glass, grouped surfaces and selected accent; includes tagged audio exports, offline lyrics resolution/cache (including romanization), portable LRC and JSON lyrics, embedded lyrics, playlist/album M3U8 manifests, reinstall restoration into native Downloads and lyrics caches, shared track files and offline storage migration while preserving Orpheon's native playback and AutoMix planner.",
     default = true,
 ) {
-    compatibleWith(MYSPOTI_STABLE)
+    compatibleWith(ORPHEON_BETA)
     dependsOn(downloadToolsActivityManifestPatch)
     extendWith("extensions/extension.mpe")
     execute { applyMyspotiStorageHooks() }

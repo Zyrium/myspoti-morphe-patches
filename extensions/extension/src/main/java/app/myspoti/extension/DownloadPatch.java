@@ -51,21 +51,21 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * Runtime bridge for the R8-minified MySpoti 2.4.1 stable APK.
- * Verified APK mappings: OfflineStore=it5, OfflineTrack=jt5,
- * OfflineCrypto=vr5, OfflineCollections=tr5, OfflineCollection=or5, OfflineAccounts=nr5.
- * Myspoti source origin: https://github.com/kota-zo/myspoti (GPL-3.0).
+ * Runtime bridge for the R8-minified Orpheon 1.0.0-beta.1 APK.
+ * Verified APK mappings: OfflineStore=d86, OfflineTrack=e86,
+ * OfflineCrypto=p66, OfflineCollections=n66, OfflineCollection=i66, OfflineAccounts=h66.
+ * Orpheon source origin: https://github.com/kota-zo/Orpheon (GPL-3.0).
  */
 public final class DownloadPatch {
     private static final String TAG = "MyspotiStoragePatch";
     private static final String PREFS = "morphe_download_tools";
     private static final String PREF_LOCATION = "storage_id";
 
-    // R8 class names and member names are pinned to the inspected 2.4.1 stable APK.
-    private static final String STORE = "it5";
-    private static final String TRACK = "jt5";
-    private static final String CRYPTO = "vr5";
-    private static final String COLLECTIONS = "tr5";
+    // R8 class names and member names are pinned to the inspected 1.0.0-beta.1 APK.
+    private static final String STORE = "d86";
+    private static final String TRACK = "e86";
+    private static final String CRYPTO = "p66";
+    private static final String COLLECTIONS = "n66";
 
     private static volatile Context appContext;
     private static volatile Activity foregroundActivity;
@@ -154,10 +154,10 @@ public final class DownloadPatch {
      * final recomposition. This avoids depending on Compose internals or R8-renamed APIs.
      */
     public static void syncImmersiveSettingsAction(Object page) {
-        // Lwg7 is the inspected 2.4.1 R8 descriptor for the private SettingsPage enum
+        // Lk18 is the inspected 1.0.0-beta.1 R8 descriptor for the private SettingsPage enum
         // (Root, Playback, Sources, Lyrics, Streaming, Crossfade, Downloads, ...).
         // The router's Function4 class is R8-merged, so ignore its unrelated call sites.
-        if (!(page instanceof Enum<?>) || !"wg7".equals(page.getClass().getName())) return;
+        if (!(page instanceof Enum<?>) || !"k18".equals(page.getClass().getName())) return;
         boolean downloads = "Downloads".equals(((Enum<?>) page).name());
         runOnMain(() -> {
             SETTINGS_ACTION_HANDLER.removeCallbacks(REMOVE_SETTINGS_ACTION);

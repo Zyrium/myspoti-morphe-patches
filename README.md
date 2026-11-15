@@ -1,6 +1,6 @@
 # MySpoti patches for Morphe
 
-Community-maintained patches for the MySpoti Android app, built with the [Morphe patching framework](https://github.com/MorpheApp). This repository combines the Spotify branding resource patch with export, storage, local-first playback, playlist/album, lyrics, and reinstall-restore patches for MySpoti stable 2.4.1.
+Community-maintained patches for the MySpoti / Orpheon Android app, built with the [Morphe patching framework](https://github.com/MorpheApp). This repository combines the Spotify branding resource patch with export, storage, local-first playback, playlist/album, lyrics, and reinstall-restore patches for Orpheon 1.0.0-beta.1.
 
 ## Add this repository to Morphe
 
