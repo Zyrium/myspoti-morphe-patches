@@ -1,13 +1,13 @@
-# MySpoti patches for Morphe
+# MySpoti / Orpheon patches for Morphe
 
-Community-maintained patches for the MySpoti / Orpheon Android app, built with the [Morphe patching framework](https://github.com/MorpheApp). This repository combines the Spotify branding resource patch with export, storage, local-first playback, playlist/album, lyrics, and reinstall-restore patches for Orpheon 1.0.0-beta.1.
+Community-maintained patches for the MySpoti / Orpheon Android app, built with the [Morphe patching framework](https://github.com/MorpheApp). This repository combines the Spotify branding resource patch with export, storage, local-first playback, playlist/album, lyrics, and reinstall-restore patches for Orpheon `1.0.0-beta.1`.
 
 ## Add this repository to Morphe
 
-[**➕ Add MySpoti patches to Morphe**](https://morphe.software/add-source?github=amit-0i/myspoti-morphe-patches)
+[**➕ Add MySpoti / Orpheon patches to Morphe**](https://morphe.software/add-source?github=Zyrium/myspoti-morphe-patches)
 
 You can also add the repository manually in Morphe using:
-`https://github.com/amit-0i/myspoti-morphe-patches`
+`https://github.com/Zyrium/myspoti-morphe-patches`
 
 ## Available patches
 
@@ -67,12 +67,14 @@ The resource-only branding patch renames MySpoti to Spotify and applies consiste
 
 Supported package variants:
 
+- `app.orpheon.beta`
+- `app.orpheon`
 - `app.myspoti`
 - `app.myspoti.stable`
 
 ## MySpoti Export & Storage
 
-The export/storage bytecode and resource patch adds **Settings → Downloads → Export & storage** to MySpoti APK in both Classic and Immersive looks. It also makes downloaded-track selection local-first, and depends on the bundled Android extension.
+The export/storage bytecode and resource patch adds **Settings → Downloads → Export & storage** to the Orpheon (`1.0.0-beta.1`) APK in both Classic and Immersive looks. It also makes downloaded-track selection local-first, and depends on the bundled Android extension.
 
 Features:
 
@@ -100,6 +102,6 @@ Lyrics availability depends on MySpoti's resolver returning a complete result. L
 
 - **Morphe** — patching framework and build tooling.
 - **Morphe Patches Template** — initial project structure.
-- **MySpoti** — original Android application and offline/lyrics implementation; source: <https://github.com/kota-zo/myspoti>.
+- **MySpoti / Orpheon** — original Android application and offline/lyrics implementation; source: <https://github.com/kota-zo/Orpheon>.
 
 Spotify and its logo are trademarks of their respective owner and are used only to describe this independent branding customization. This project is not affiliated with, endorsed by, or officially associated with Spotify, MySpoti, or Morphe. See `LICENSE` and `NOTICE` for license details.
