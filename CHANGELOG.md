@@ -1,3 +1,9 @@
+## [1.5.0](https://github.com/Zyrium/myspoti-morphe-patches/compare/v1.4.0...v1.5.0) (2026-11-15)
+
+### ✨ New Features
+
+* **orpheon:** add Orpheon 1.0.0-beta.1 compatibility ([b5955bd](https://github.com/Zyrium/myspoti-morphe-patches/commit/b5955bd9e8ad8c1e19f2c6a1cda89134b8e2332a))
+
 ## [1.4.0](https://github.com/Zyrium/myspoti-morphe-patches/compare/v1.3.2...v1.4.0) (2026-11-12)
 
 ### ✨ New Features

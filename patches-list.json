@@ -1,16 +1,16 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "patches": [
     {
       "name": "MySpoti Export & Storage",
-      "description": "Adds Export & storage to Settings > Downloads in MySpoti 2.4.1 in both Classic and Immersive looks, matching MySpoti's Immersive glass, grouped surfaces and selected accent; includes tagged audio exports, offline lyrics resolution/cache (including romanization), portable LRC and JSON lyrics, embedded lyrics, playlist/album M3U8 manifests, reinstall restoration into native Downloads and lyrics caches, shared track files and offline storage migration while preserving MySpoti's native playback and AutoMix planner.",
+      "description": "Adds Export & storage to Settings > Downloads in Orpheon 1.0.0-beta.1 in both Classic and Immersive looks, matching Orpheon's Immersive glass, grouped surfaces and selected accent; includes tagged audio exports, offline lyrics resolution/cache (including romanization), portable LRC and JSON lyrics, embedded lyrics, playlist/album M3U8 manifests, reinstall restoration into native Downloads and lyrics caches, shared track files and offline storage migration while preserving Orpheon's native playback and AutoMix planner.",
       "default": true,
       "category": null,
       "compatiblePackages": [
         {
-          "packageName": "app.myspoti.stable",
-          "name": "MySpoti",
+          "packageName": "app.orpheon.beta",
+          "name": "Orpheon",
           "description": null,
           "apkFileType": "APK",
           "appIconColor": "#1DB954",
@@ -18,7 +18,7 @@
           "formFactor": "MOBILE",
           "targets": [
             {
-              "version": "2.4.1",
+              "version": "1.0.0-beta.1",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
@@ -56,6 +56,42 @@
         {
           "packageName": "app.myspoti.stable",
           "name": "MySpoti",
+          "description": null,
+          "apkFileType": "APK",
+          "appIconColor": "#1ED760",
+          "signatures": null,
+          "formFactor": "MOBILE",
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "app.orpheon.beta",
+          "name": "Orpheon",
+          "description": null,
+          "apkFileType": "APK",
+          "appIconColor": "#1ED760",
+          "signatures": null,
+          "formFactor": "MOBILE",
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "app.orpheon",
+          "name": "Orpheon",
           "description": null,
           "apkFileType": "APK",
           "appIconColor": "#1ED760",
